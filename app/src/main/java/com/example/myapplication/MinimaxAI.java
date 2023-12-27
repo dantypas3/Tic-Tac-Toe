@@ -25,7 +25,7 @@ public class MinimaxAI {
 
     private int evaluateMove (int[][] board) {
         for (int i = 0; i < 3; i++) {
-            if (gameLogic.checkRowWin(i, 0)) {
+            if (gameLogic.checkRowWin(i)) {
                 if (board[i][0] == 2) {
                     return +10;
                 } else if (board[i][0] == 1) {
@@ -33,7 +33,7 @@ public class MinimaxAI {
                 }
             }
 
-            if (gameLogic.checkColWin(0, i)) {
+            if (gameLogic.checkColWin(i)) {
                 if (board[0][i] == 2) {
                     return +10;
                 } else if (board[0][i] == 1) {

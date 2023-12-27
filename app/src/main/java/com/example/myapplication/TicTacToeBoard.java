@@ -108,15 +108,15 @@ public class TicTacToeBoard extends View {
         paint.setStrokeWidth(20);
 
         switch (gameLogic.getWinningCondition()) {
-            case GameLogic.winRow:
+            case WIN_ROW:
                 float startY = gameLogic.getWinningRow() * cellSize + cellSize / 2f;
                 canvas.drawLine(0, startY, canvas.getWidth(), startY, paint);
                 break;
-            case GameLogic.winCollumn:
+            case WIN_COLUMN:
                 float startX = gameLogic.getWinningColumn() * cellSize + cellSize / 2f;
                 canvas.drawLine(startX, 0, startX, canvas.getHeight(), paint);
                 break;
-            case GameLogic.winDiag:
+            case WIN_DIAGONAL:
                 if (gameLogic.getWinningDiagonal() == 0) { // Main diagonal
                     canvas.drawLine(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
                 } else if (gameLogic.getWinningDiagonal() == 1) { // Anti-diagonal
@@ -127,9 +127,9 @@ public class TicTacToeBoard extends View {
     }
 
     private void checkWin (int row, int column) {
-        if (gameLogic.checkRowWin(row, column)) {
+        if (gameLogic.checkRowWin(row)) {
             gameLogic.setIsOver(true);
-        } else if (gameLogic.checkColWin(row, column)) {
+        } else if (gameLogic.checkColWin(column)) {
             gameLogic.setIsOver(true);
         } else if (gameLogic.checkDiagWin()) {
             gameLogic.setIsOver(true);

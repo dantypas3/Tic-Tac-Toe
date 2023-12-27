@@ -7,14 +7,10 @@ public class GameLogic {
     //Default player is 1
     private int activePlayer = 1;
     private boolean isOver = false;
-    public static final int winRow = 1;
-    public static final int winCollumn = 2;
-    public static final int winDiag = 3;
-    public static final int draw = 4;
     private int winningColumn;
     private int winningRow;
     private int winningDiagonal;
-    private int winningCondition;
+    private WinCases winCase;
     private boolean isVsAI;
 
     //Initialize empty game board
@@ -66,7 +62,7 @@ public class GameLogic {
         return activePlayer;
     }
 
-    public boolean checkColWin (int row, int column) {
+    public boolean checkColWin (int column) {
         int firstVal = gameBoard[0][column];
         if (firstVal == 0) {return false;}
 
@@ -76,11 +72,11 @@ public class GameLogic {
             }
         }
         winningColumn = column;
-        winningCondition = winCollumn;
+        winCase = WinCases.WIN_COLUMN;
         return true;
     }
 
-    public boolean checkRowWin (int row, int column) {
+    public boolean checkRowWin (int row) {
         int firstVal = gameBoard[row][0];
         if (firstVal == 0) {return false;}
 
@@ -90,7 +86,7 @@ public class GameLogic {
             }
         }
         winningRow = row;
-        winningCondition = winRow;
+        winCase = WinCases.WIN_ROW;
         return true;
     }
 
@@ -98,13 +94,13 @@ public class GameLogic {
         // Check main diagonal
         if (gameBoard[0][0] != 0 && gameBoard[0][0] == gameBoard[1][1] && gameBoard[0][0] == gameBoard[2][2]) {
             winningDiagonal = 0;
-            winningCondition = winDiag;
+            winCase = WinCases.WIN_DIAGONAL;
             return true;
         }
         // Check anti-diagonal
         if (gameBoard[0][2] != 0 && gameBoard[0][2] == gameBoard[1][1] && gameBoard[0][2] == gameBoard[2][0]) {
             winningDiagonal = 1;
-            winningCondition = winDiag;
+            winCase = WinCases.WIN_DIAGONAL;
             return true;
         }
         return false;
@@ -118,7 +114,7 @@ public class GameLogic {
                 }
             }
         }
-        winningCondition = draw;
+        winCase = WinCases.TIE;
         return !isOver;
     }
 
@@ -134,7 +130,7 @@ public class GameLogic {
 
     public boolean isVsAI () {return isVsAI;}
 
-    public int getWinningCondition () {return winningCondition;}
+    public WinCases getWinningCondition () {return winCase;}
 
     public int getWinningRow () {return winningRow;}
 
