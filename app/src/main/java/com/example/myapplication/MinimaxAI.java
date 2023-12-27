@@ -4,18 +4,18 @@ import android.util.Pair;
 
 public class MinimaxAI {
     private GameLogic gameLogic;
-    private final int AI = 2;
+    /*private final int AI = 2;
     private final int PLAYER = 1;
-    private final int EMPTY = 0;
+    private final int EMPTY = 0;*/
 
     public MinimaxAI (GameLogic gameLogic) {
         this.gameLogic = gameLogic;
     }
 
-    private boolean checkMovesLeft (int[][] board) {
-        for (int[] row : board) {
-            for (int cell : row) {
-                if (cell == EMPTY) {
+    private boolean checkMovesLeft (Player[][] board) {
+        for (Player[] row : board) {
+            for (Player cell : row) {
+                if (cell == Player.NONE) {
                     return true;
                 }
             }
@@ -23,35 +23,35 @@ public class MinimaxAI {
         return false;
     }
 
-    private int evaluateMove (int[][] board) {
+    private int evaluateMove (Player[][] board) {
         for (int i = 0; i < 3; i++) {
             if (gameLogic.checkRowWin(i)) {
-                if (board[i][0] == 2) {
+                if (board[i][0] == Player.PLAYER_2) {
                     return +10;
-                } else if (board[i][0] == 1) {
+                } else if (board[i][0] == Player.PLAYER_1) {
                     return -10;
                 }
             }
 
             if (gameLogic.checkColWin(i)) {
-                if (board[0][i] == 2) {
+                if (board[0][i] == Player.PLAYER_2) {
                     return +10;
-                } else if (board[0][i] == 1) {
+                } else if (board[0][i] == Player.PLAYER_1) {
                     return -10;
                 }
             }
         }
         if (gameLogic.checkDiagWin()) {
-            if (board[1][1] == 2) {
+            if (board[1][1] == Player.PLAYER_2) {
                 return +10;
-            } else if (board[1][1] == 1) {
+            } else if (board[1][1] == Player.PLAYER_1) {
                 return -10;
             }
         }
         return 0;
     }
 
-    int minimax (int[][] board, int depth, boolean isMax) {
+    int minimax (Player[][] board, int depth, boolean isMax) {
         int score = evaluateMove(board);
 
         if (score == 10 || score == -10) {
@@ -66,10 +66,10 @@ public class MinimaxAI {
 
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    if (board[i][j] == EMPTY) {
-                        board[i][j] = AI;
+                    if (board[i][j] == Player.NONE) {
+                        board[i][j] = Player.AI;
                         bestScore = Math.max(bestScore, minimax(board, depth + 1, false));
-                        board[i][j] = EMPTY;
+                        board[i][j] = Player.NONE;
                     }
                 }
             }
@@ -79,10 +79,10 @@ public class MinimaxAI {
 
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    if (board[i][j] == EMPTY) {
-                        board[i][j] = PLAYER;
+                    if (board[i][j] == Player.NONE) {
+                        board[i][j] = Player.PLAYER_1;
                         bestScore = Math.min(bestScore, minimax(board, depth + 1, true));
-                        board[i][j] = EMPTY;
+                        board[i][j] = Player.NONE;
                     }
                 }
             }
@@ -90,18 +90,18 @@ public class MinimaxAI {
         }
     }
 
-    Pair<Integer, Integer> findOptimalMove (int[][] board) {
+    Pair<Integer, Integer> findOptimalMove (Player[][] board) {
         int bestScore = Integer.MIN_VALUE;
         Pair<Integer, Integer> optimalMove = new Pair<>(-1, -1);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (board[i][j] == EMPTY) {
-                    board[i][j] = AI;
+                if (board[i][j] == Player.NONE) {
+                    board[i][j] = Player.AI;
 
                     int moveScore = minimax(board, 0, false);
 
-                    board[i][j] = EMPTY;
+                    board[i][j] = Player.NONE;
 
                     if (moveScore > bestScore) {
                         optimalMove = new Pair<>(i, j);

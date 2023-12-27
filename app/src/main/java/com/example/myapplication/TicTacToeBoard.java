@@ -18,8 +18,9 @@ public class TicTacToeBoard extends View {
     private final int winningLineColor;
     private final Paint paint = new Paint();
     private int cellSize = getWidth() / 3;
-    private final int AI = 2;
-    private final int PLAYER = 1;
+
+    /*private final int AI = 2;
+    private final int PLAYER = 1;*/
     private GameLogic gameLogic;
     private MinimaxAI minimaxAI;
 
@@ -57,9 +58,10 @@ public class TicTacToeBoard extends View {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (gameLogic.getGameBoard()[i][j] == 1) {
+                if (gameLogic.getGameBoard()[i][j] == Player.PLAYER_1) {
                     drawX(canvas, i, j);
-                } else if (gameLogic.getGameBoard()[i][j] == 2) {
+                } else if (gameLogic.getGameBoard()[i][j] == Player.PLAYER_2 ||
+                           gameLogic.getGameBoard()[i][j] == Player.AI) {
                     drawO(canvas, i, j);
                 }
             }
@@ -137,7 +139,7 @@ public class TicTacToeBoard extends View {
     }
 
     private void AIMove () {
-        if (gameLogic.isVsAI() && gameLogic.getActivePlayer() == AI && !gameLogic.checkIsOver()) {
+        if (gameLogic.isVsAI() && gameLogic.getActivePlayer() == Player.AI && !gameLogic.checkIsOver()) {
             Pair<Integer, Integer> bestMove = minimaxAI.findOptimalMove(gameLogic.getGameBoard());
             gameLogic.updateGameBoard(bestMove.first, bestMove.second);
             checkWin(bestMove.first, bestMove.second);
