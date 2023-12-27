@@ -4,9 +4,6 @@ import android.util.Pair;
 
 public class MinimaxAI {
     private GameLogic gameLogic;
-    /*private final int AI = 2;
-    private final int PLAYER = 1;
-    private final int EMPTY = 0;*/
 
     public MinimaxAI (GameLogic gameLogic) {
         this.gameLogic = gameLogic;
@@ -26,7 +23,7 @@ public class MinimaxAI {
     private int evaluateMove (Player[][] board) {
         for (int i = 0; i < 3; i++) {
             if (gameLogic.checkRowWin(i)) {
-                if (board[i][0] == Player.PLAYER_2) {
+                if (board[i][0] == Player.AI) {
                     return +10;
                 } else if (board[i][0] == Player.PLAYER_1) {
                     return -10;
@@ -34,7 +31,7 @@ public class MinimaxAI {
             }
 
             if (gameLogic.checkColWin(i)) {
-                if (board[0][i] == Player.PLAYER_2) {
+                if (board[0][i] == Player.AI) {
                     return +10;
                 } else if (board[0][i] == Player.PLAYER_1) {
                     return -10;
@@ -42,7 +39,7 @@ public class MinimaxAI {
             }
         }
         if (gameLogic.checkDiagWin()) {
-            if (board[1][1] == Player.PLAYER_2) {
+            if (board[1][1] == Player.AI) {
                 return +10;
             } else if (board[1][1] == Player.PLAYER_1) {
                 return -10;

@@ -18,9 +18,6 @@ public class TicTacToeBoard extends View {
     private final int winningLineColor;
     private final Paint paint = new Paint();
     private int cellSize = getWidth() / 3;
-
-    /*private final int AI = 2;
-    private final int PLAYER = 1;*/
     private GameLogic gameLogic;
     private MinimaxAI minimaxAI;
 
