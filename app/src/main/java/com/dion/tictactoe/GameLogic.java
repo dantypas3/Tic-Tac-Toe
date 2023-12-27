@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.dion.tictactoe;
 
 public class GameLogic {
     private static GameLogic instance;

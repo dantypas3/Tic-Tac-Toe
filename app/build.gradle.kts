@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.dion.tictactoe"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "dion.tictactoe"
         minSdk = 30
         targetSdk = 34
         versionCode = 1

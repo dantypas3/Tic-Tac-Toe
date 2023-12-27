@@ -13,13 +13,13 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".GameDisplay"
+            android:name="com.dion.tictactoe.GameDisplay"
             android:exported="false" />
         <activity
-            android:name=".PlayerSetup"
+            android:name="com.dion.tictactoe.PlayerSetup"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.dion.tictactoe.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

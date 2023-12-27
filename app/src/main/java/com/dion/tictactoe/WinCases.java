@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.dion.tictactoe;
 
 public enum WinCases {
     WIN_ROW,
