@@ -5,7 +5,7 @@ import android.util.Pair;
 public class MinimaxAI {
     private GameLogic gameLogic;
     private final int AI = 2;
-    private final int  PLAYER  = 1;
+    private final int PLAYER = 1;
     private final int EMPTY = 0;
 
     public MinimaxAI (GameLogic gameLogic) {
@@ -51,7 +51,7 @@ public class MinimaxAI {
         return 0;
     }
 
-    int minimax(int[][] board, int depth, boolean isMax) {
+    int minimax (int[][] board, int depth, boolean isMax) {
         int score = evaluateMove(board);
 
         if (score == 10 || score == -10) {
@@ -90,26 +90,26 @@ public class MinimaxAI {
         }
     }
 
-   Pair<Integer, Integer> findOptimalMove(int[][] board) {
+    Pair<Integer, Integer> findOptimalMove (int[][] board) {
         int bestScore = Integer.MIN_VALUE;
-        Pair<Integer, Integer> optimalMove = new Pair<> (-1, -1);
+        Pair<Integer, Integer> optimalMove = new Pair<>(-1, -1);
 
-        for(int i= 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (board[i][j] == EMPTY) {
                     board[i][j] = AI;
 
-                    int moveScore= minimax(board, 0, false);
+                    int moveScore = minimax(board, 0, false);
 
                     board[i][j] = EMPTY;
 
                     if (moveScore > bestScore) {
-                        optimalMove = new Pair<> (i, j);
+                        optimalMove = new Pair<>(i, j);
                         bestScore = moveScore;
                     }
                 }
             }
         }
         return optimalMove;
-   }
+    }
 }

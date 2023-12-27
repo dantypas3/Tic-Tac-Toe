@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class GameDisplay extends AppCompatActivity {
-
     private String player1;
     private String player2;
     private TicTacToeBoard ticTacToeBoard;
@@ -16,7 +15,7 @@ public class GameDisplay extends AppCompatActivity {
     private TextView header;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_display); // Ensure you have the correct layout
 
@@ -28,7 +27,7 @@ public class GameDisplay extends AppCompatActivity {
         String[] playerNames = intent.getStringArrayExtra("PLAYER_NAMES");
 
         //Player names for game against human or AI player
-        if (playerNames != null && playerNames.length == 2 && !playerNames[1].equals("AI"))  {
+        if (playerNames != null && playerNames.length == 2 && !playerNames[1].equals("AI")) {
             player1 = playerNames[0];
             player2 = playerNames[1];
         } else if (playerNames != null && playerNames[1].equals("AI")) {
@@ -54,22 +53,23 @@ public class GameDisplay extends AppCompatActivity {
         resetButton.setOnClickListener(v -> resetGame());
     }
 
-    private void navigateHome() {
+    private void navigateHome () {
         Intent homeIntent = new Intent(this, MainActivity.class);
         resetGame();
+        gameLogic.setIsVsAI(false);
         startActivity(homeIntent);
     }
 
-    private void resetGame() {
+    private void resetGame () {
         gameLogic.resetBoard();
         ticTacToeBoard.invalidate(); // Redraw the TicTacToeBoard
         updateHeader(); // Update the header for the next game
         gameLogic.setIsOver(false);
     }
 
-    private void updateHeader() {
+    private void updateHeader () {
         // Update the header with the current player or reset text
-        if(!gameLogic.isVsAI()) {
+        if (!gameLogic.isVsAI()) {
             header.setText(player1 + " vs " + player2);
         } else {
             header.setText(player1 + " vs AI");

@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Switch;
@@ -70,7 +68,8 @@ public class PlayerSetup extends AppCompatActivity {
                     intent.putExtra("PLAYER_NAMES", new String[] {namePlayer1, "AI"});
                     startActivity(intent);
                 } else {
-                    toast.setText("Name of player 1 is missing");   //In case of missing name of player 1
+                    toast.setText(
+                            "Name of player 1 is missing");   //In case of missing name of player 1
                 }
             }
         });
