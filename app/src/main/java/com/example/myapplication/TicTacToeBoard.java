@@ -140,7 +140,7 @@ public class TicTacToeBoard extends View {
         if (gameLogic.isVsAI() && gameLogic.getActivePlayer() == AI && !gameLogic.checkIsOver()) {
             Pair<Integer, Integer> bestMove = minimaxAI.findOptimalMove(gameLogic.getGameBoard());
             gameLogic.updateGameBoard(bestMove.first, bestMove.second);
-            //checkWin(bestMove.first, bestMove.second);
+            checkWin(bestMove.first, bestMove.second);
             if (gameLogic.checkIsOver() && gameLogic.checkDraw()) {
                 gameLogic.setIsOver(true);
             }
